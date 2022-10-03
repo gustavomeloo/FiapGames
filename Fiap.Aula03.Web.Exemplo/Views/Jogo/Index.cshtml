@@ -1,0 +1,84 @@
+﻿@model List<Jogo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Jogos</h1>
+
+<form class="form-inline mb-3">
+    <input type="text" name="nomeBusca" class="form-control mr-2" placeholder="Digite o nome" />
+    <select class="form-control mr-2" asp-items="@Html.GetEnumSelectList<Plataforma>()" name="plataforma" >
+        <option>Plataforma</option>
+    </select> 
+    <input type="submit" value="Pesquisar" class="btn btn-success" />
+</form>
+
+<mensagem texto="@TempData["Alterado"]"></mensagem>
+
+<mensagem texto="@TempData["Removido"]"></mensagem>
+
+@if ( Model.Count == 0)
+{
+    <mensagem texto="Nenhum Registro encontrado" class="alert alert-danger"></mensagem>
+}
+
+<table class="table table-borderless">
+
+    <tr>
+        <th>#</th>
+        <th>Nome</th>
+        <th>Lançamento</th>
+        <th>Plataforma</th>
+        <th>Multiplataforma</th>
+        <th>Valor</th>
+        <th></th>
+    </tr>
+
+    @foreach (var j in Model)
+    {
+        <tr>
+            <td>@j.JogoId</td>
+            <td>@j.Nome</td>
+            <td>@j.DataLancamento.GetValueOrDefault().ToShortDateString()</td>
+            <td>@j.Plataforma</td>
+            <td>@(j.Multiplataforma.GetValueOrDefault()?"Sim":"Não")</td>
+            <td>@j.Valor.GetValueOrDefault().ToString("n")</td>
+
+            <td>
+                <a asp-action="editar" asp-route-id="@j.JogoId" class="btn btn-dark btn-sm">Editar</a>
+                <!--Ao clicar no botao o codigo do pedido é enviado ao campo oculato do form do modal-->
+                <button onclick="idJogo.value = @j.JogoId" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal">
+                    Remover
+                </button>
+            </td>
+        </tr>
+    }
+
+
+</table>
+
+<a class="btn btn-outline-primary" asp-action="Cadastrar" asp-controller="Jogo">New Jogo</a>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmação</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Deseja realmente remover o jogo?
+            </div>
+            <div class="modal-footer">
+                <form asp-action="Remover">
+                    <input type="hidden" name="id" id="idJogo" />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                    <button type="submit" class="btn btn-danger">Sim</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

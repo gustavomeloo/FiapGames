@@ -1,0 +1,36 @@
+﻿@model Pedido
+
+<div class="form-group">
+    <label asp-for="Cliente"></label>
+    <input asp-for="Cliente" class="form-control" />
+</div>
+
+<div class="form-group">
+    <label asp-for="Valor"></label>
+    <input asp-for="Valor" class="form-control" />
+</div>
+
+<div class="form-group">
+    <label asp-for="TipoPagamento"></label>
+    <select asp-items="@Html.GetEnumSelectList<TipoPagamento>()"
+            asp-for="TipoPagamento" class="form-control">
+        <option>Selecione</option>
+    </select>
+</div>
+
+<div class="form-group">
+    <label asp-for="Categoria"></label>
+    <select asp-for="Categoria" class="form-control" asp-items="@ViewBag.categorias">
+        <option>Selecione</option>
+    </select>
+</div>
+
+<div class="form-group">
+    <label asp-for="Data"></label>
+    <input asp-for="Data" class="form-control" />
+</div>
+
+<div class="form-group">
+    <input asp-for="Pago" />
+    <label asp-for="Pago"></label>
+</div>

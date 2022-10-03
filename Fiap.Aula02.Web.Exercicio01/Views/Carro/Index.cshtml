@@ -1,0 +1,76 @@
+﻿@model List<Carro>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<mensagem texto="@TempData["Alterado"]"></mensagem>
+
+<mensagem texto="@TempData["Removido"]"></mensagem>
+
+<h1>Carros</h1>
+
+<table class="table table-borderless">
+
+    <tr>
+        <th>#</th>
+        <th>Modelo</th>
+        <th>Marca</th>
+        <th>Fabricação</th>
+        <th>Ano</th>
+        <th>Valor</th>
+        <th>Combustivel</th>
+        <th>Câmbio</th>
+        <th></th>
+    </tr>
+
+    @foreach (var car in Model)
+    {
+        <tr>
+            <td>@car.Id</td>
+            <td>@car.Modelo</td>
+            <td>@car.Marca</td>
+            <td>@car.FabricationDate.ToShortDateString()</td>
+            <td>@car.Ano</td>
+            <td>@car.Value.ToString("N")</td>
+            <td>@car.Tipo</td>
+            <td>@(car.Automatic?"Automatico":"Manual")</td>
+            <td>
+                <a asp-action="editar" asp-route-id="@car.Id" class="btn btn-dark btn-sm">Editar</a>
+                <!--Ao clicar no botao o codigo do pedido é enviado ao campo oculato do form do modal-->
+                <button onclick="idCarro.value = @car.Id" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal">
+                    Remover
+                </button>
+            </td>
+        </tr>
+    }
+
+
+</table>
+
+<a class="btn btn-outline-primary" asp-action="Cadastrar" asp-controller="Carro"> Cadastrar</a>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmação</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Deseja realmente remover o carro?
+            </div>
+            <div class="modal-footer">
+                <form asp-action="deletar">
+                    <input type="hidden" name="id" id="idCarro" />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                    <button type="submit" class="btn btn-danger">Sim</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

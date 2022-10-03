@@ -1,0 +1,20 @@
+﻿@model Pedido
+
+@{
+    ViewData["Title"] = "Editar";
+}
+
+<h1>Editar</h1>
+
+<form asp-action="Editar">
+
+    <input asp-for="Codigo" />
+
+    <partial name="_Form" />
+
+    <input value="submit" class="btn btn-outline-primary" type="submit" />
+
+    <a class="btn btn-danger" asp-controller="pedido" asp-action="index">Cancelar</a>
+
+</form>
+

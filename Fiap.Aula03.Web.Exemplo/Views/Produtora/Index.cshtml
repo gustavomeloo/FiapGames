@@ -1,0 +1,35 @@
+﻿@model List<Produtora> 
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<h1>Produtoras</h1>
+
+<mensagem texto="@TempData["msg"]"></mensagem>
+
+<table class="table table-borderless">
+
+    <tr>
+        <th>#</th>
+        <th>Nome</th>
+        <th>Data Fundação</th>
+        <th>Endereço</th>
+        <th>Cep</th>
+    </tr>
+
+    @foreach (var p in Model)
+    {
+        <tr>
+            <td>@p.ProdutoraId</td>
+            <td>@p.Nome</td>
+            <td>@p.DataFundacao.ToShortDateString()</td>
+            <td>@p.Endereco?.Logradouro</td>
+            <td>@p.Endereco?.Cep</td>
+        </tr>
+    }
+
+
+</table>
+
+

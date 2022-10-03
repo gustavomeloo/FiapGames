@@ -1,0 +1,18 @@
+﻿@model Carro 
+
+@{
+    ViewData["Title"] = "Editar";
+}
+
+<h1>Editar</h1>
+
+<form asp-action="Editar" >
+    <input asp-for="Id" />
+
+    <partial name="_Form" />
+
+    <input type="submit" value="Atualizar" class="btn btn-primary" />
+
+    <a asp-action="Index" asp-controller="Carro" class="btn btn-danger">Cancelar</a>
+
+</form>

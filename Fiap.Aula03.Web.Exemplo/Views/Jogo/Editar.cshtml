@@ -1,0 +1,19 @@
+﻿@model Jogo 
+
+@{
+    ViewData["Title"] = "Editar";
+}
+
+<h1>Editar</h1>
+
+<form asp-action="Editar">
+
+    <input asp-for="JogoId" />
+
+    <partial name="_Form" />
+
+    <input type="submit" value="Editar" class="btn btn-primary" />
+
+    <a class="btn btn-danger" asp-controller="jogo" asp-action="index">Listar</a>
+
+</form>

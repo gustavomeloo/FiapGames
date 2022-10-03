@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<a class="btn btn-primary" asp-controller="carro" asp-action="cadastrar">Cadastrar Carro</a>
+
+<!-- Atividade:
+    IMplementar um crud
+    Model: (Modelo, Marca (Opções, lista de string), data de fabricação, ano/modelo, valor, combustivel (Enum), Automatico (bool))
+
+    Criar o Controller
+
+    Cadastrar:
+        criar a action get para abrir a pagina
+        criar a página (partial view para o formulário)
+        criar a action post para cadastrar na lista e redirecionar para...
+
+    Listar:
+        Ajustar a action get (index)
+        criar a página
+    
+    Editar:
+        Ajuste na pagina de lista para adicionar um link
+        Criar uma action get que receba um id, pesquisa e envia o model para a view
+        criar a pagina (partial view para o formulario)
+        criar a action post para editar na lista e redirecionar para..
+
+    Remover: 
+        Ajustar a página de listagem para adicionar o model
+        criar a action post para remover da lista e redirecionar para a listagem
+
+    Criar um taghelper
+    Ajustar os links (layout)
+
+-->

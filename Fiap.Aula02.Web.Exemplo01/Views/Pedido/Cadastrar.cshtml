@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewData["Title"] = "Cadastrar";
+}
+
+<h1>Cadastrar Pedido</h1>
+
+<mensagem texto="@TempData["msg"]"></mensagem>
+
+<form asp-action="Cadastrar">
+
+    <partial name="_Form"/>
+
+    <botao texto="Submit" ></botao>
+
+    <a class="btn btn-danger" asp-controller="pedido" asp-action="index"> Listar</a>
+
+</form>
+
+
+@section Banner {
+    <a  asp-controller="home" asp-action="index">Clique Aqui</a>
+}
+
+

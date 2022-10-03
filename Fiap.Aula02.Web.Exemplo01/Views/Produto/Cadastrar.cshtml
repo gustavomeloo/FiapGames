@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewData["Title"] = "Cadastrar";
+}
+
+
+
+<h1>Cadastrar</h1>
+@TempData["nome"]
+
+@model Produto
+
+@if (ViewBag.prod != null)
+{
+    <div>
+        ViewData:
+
+        Strongly Typed View
+        @Model.Nome @Model.Preco @Model.Quantidade
+    </div>
+
+    <div>
+        ViewBag:
+        @ViewBag.quantidade
+        @ViewBag.prod.Nome
+        <br />
+        
+    </div>
+}
+
+
+<form method="post">
+
+    <div class="form-group">
+
+        <label>nome</label>
+        <input type="text" placeholder="nome" name="nome" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>preço</label>
+        <input type="text" placeholder="preco" name="preco" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>quantidade</label>
+        <input type="text" placeholder="quantidade" name="quantidade" class="form-control" />
+    </div>
+
+    <input type="submit" value="cadastrar" class="btn-light" />
+
+
+
+</form>
+

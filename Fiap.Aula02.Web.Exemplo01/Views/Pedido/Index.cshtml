@@ -1,0 +1,74 @@
+﻿@model List<Pedido>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<mensagem texto="@TempData["up"]"></mensagem>
+<mensagem texto="@TempData["delete"]"></mensagem>
+
+<h1>Pedidos</h1>
+
+<table class="table table-striped">
+    <tr>
+        <th>Código</th>
+        <th>Cliente</th>
+        <th>Data</th>
+        <th>Valor</th>
+        <th>Pago</th>
+        <th>Pagamento</th>
+        <th>Categoria</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Codigo</td>
+            <td>@item.Cliente</td>
+            <td>@item.Data.ToShortDateString()</td>
+            <td>@item.Valor.ToString("N")</td>
+            <td>@(item.Pago?"Sim" : "Não")</td>
+            <td>@(item.TipoPagamento)</td>
+            <td>@(item.Categoria)</td>
+            <td>
+                <a asp-action="editar" asp-route-id="@item.Codigo" class="btn btn-dark btn-sm">Editar</a>
+                <!--Ao clicar no botao o codigo do pedido é enviado ao campo oculato do form do modal-->
+                <button onclick="idPedido.value = @item.Codigo" type="button" class="btn btn-danger btn-sm " data-toggle="modal" data-target="#exampleModal">
+                    Remover
+                </button>
+
+                <!--<a asp-action="delete" asp-route-id="@item.Codigo" class="btn btn-danger">Remover</a>-->
+            </td>
+
+        </tr>
+
+    }
+
+</table>
+<a class="btn btn-outline-warning" asp-controller="pedido" asp-action="cadastrar"> Cadastrar</a>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmação</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Deseja realmente remover o pedido?
+            </div>
+            <div class="modal-footer">
+                <form asp-action="delete" >
+                    <input type="hidden" name="id" id="idPedido"/>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                    <button type="submit" class="btn btn-danger">Sim</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
